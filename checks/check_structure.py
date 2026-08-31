@@ -17,6 +17,7 @@ REQUIRED_FILES = [
     "init.sh",
     "requirements.txt",
     ".claude/settings.json",
+    ".github/workflows/ci.yml",
     ".claude/agents/bookkeeper.md",
     ".claude/agents/reviewer.md",
     ".claude/agents/explorer.md",

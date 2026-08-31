@@ -1,6 +1,6 @@
 # Runtime dependencies (the only third-party imports allowed in scripts/ and checks/)
-pandas>=2.0
-pyyaml>=6.0
+pandas>=2.0,<3
+pyyaml>=6.0,<7
 
 # Dev/test dependency only. Used to run tests/; never imported by scripts/ or checks/.
-pytest>=8.0
+pytest>=8.0,<9

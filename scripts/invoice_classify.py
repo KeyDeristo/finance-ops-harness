@@ -156,7 +156,7 @@ def main(argv: list[str] | None = None) -> int:
                              "(conventionally under progress/)")
     args = parser.parse_args(argv)
 
-    invoices = pd.read_csv(args.invoices_csv)
+    invoices = pd.read_csv(args.invoices_csv, encoding="utf-8")
     required = {"invoice_id", "supplier", "description", "amount"}
     missing = required - set(invoices.columns)
     if missing:
@@ -167,7 +167,7 @@ def main(argv: list[str] | None = None) -> int:
     result = classify_all(invoices, rules)
     print(format_report(result, float(rules.get("confidence_threshold", 0.75))))
     if args.output:
-        result.to_csv(args.output, index=False)
+        result.to_csv(args.output, index=False, encoding="utf-8")
         print(f"\nProposals saved to {args.output}")
     return 0
 

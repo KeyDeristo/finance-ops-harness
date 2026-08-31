@@ -70,6 +70,9 @@ def validate(path: str | Path) -> tuple[list[str], list[str]]:
     warnings: list[str] = []
 
     try:
+        # ET.parse opens the file in binary mode and takes the encoding from
+        # the XML declaration (UTF-8 when absent), so it is independent of the
+        # platform locale -- there is no encoding argument to pass here.
         root = ET.parse(path).getroot()
     except ET.ParseError as exc:
         return [f"not well-formed XML: {exc}"], []

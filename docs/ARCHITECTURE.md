@@ -57,6 +57,11 @@ Agents share **no memory**: everything crosses role boundaries through files in
 `progress/`. This is deliberate — it makes every handoff auditable and lets any
 agent (or human) resume from a crash by reading state.
 
+This flow governs work done *with* the harness. Changes to the harness itself
+(`checks/`, `scripts/`, `tests/`, `.github/`, `.claude/`, `AGENTS.md`,
+`README.md`) are ordinary software changes: branch, CI green, review before
+merge, and no entry in `progress/tasks.json`. See AGENTS.md §2.1.
+
 ## Scripts
 
 Deterministic tools, stdlib + pandas + pyyaml only, no network, no API calls:

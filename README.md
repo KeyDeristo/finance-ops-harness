@@ -1,5 +1,7 @@
 # finance-ops-harness
 
+[![CI](https://github.com/KeyDeristo/finance-ops-harness/actions/workflows/ci.yml/badge.svg)](https://github.com/KeyDeristo/finance-ops-harness/actions/workflows/ci.yml)
+
 A generic, open-source template that applies **harness engineering** — the
 discipline of giving AI agents a verified environment, explicit rules and
 file-based memory — to **finance operations**. SOPs, controls, coding rules, a
@@ -11,6 +13,13 @@ in one repository that doubles as audit documentation.
 > Jurisdiction values (including the Norway example) are illustrative, not
 > legal or accounting advice — verify against official sources before relying
 > on them.
+
+## Status
+
+v0.1.0 — template scaffold with synthetic data only. Not yet used in
+production, so treat the SOPs, controls and jurisdiction values as a starting
+point to verify, not as a finished process. Contributions and forks are
+welcome.
 
 ## Who this is for
 

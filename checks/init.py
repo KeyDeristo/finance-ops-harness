@@ -15,6 +15,7 @@ Agents: if this fails, stop and report -- do not work (AGENTS.md, section 1).
 """
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -41,8 +42,13 @@ def check_environment() -> tuple[bool, str]:
 
 
 def run_step(argv: list[str]) -> tuple[bool, str]:
+    # We decode the child's output as UTF-8, so the child must encode it as
+    # UTF-8. Without PYTHONIOENCODING a Python child writing to a pipe uses the
+    # locale encoding (cp1252 on a default Windows install), which would mangle
+    # any non-ASCII character on the way back here.
+    env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
     result = subprocess.run(argv, cwd=ROOT, capture_output=True, text=True,
-                            encoding="utf-8", errors="replace")
+                            encoding="utf-8", errors="replace", env=env)
     output = (result.stdout + result.stderr).strip()
     return result.returncode == 0, output
 

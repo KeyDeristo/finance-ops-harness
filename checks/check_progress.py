@@ -83,7 +83,7 @@ def run(root: Path) -> list[str]:
                                        for e in evidence):
                 problems.append(
                     f"{label}: status is 'done' but evidence is empty or "
-                    f"invalid — control C-02: nothing is done without evidence")
+                    f"invalid -- control C-02: nothing is done without evidence")
             if not str(task["owner"]).strip():
                 problems.append(f"{label}: status is 'done' but owner is empty")
 
@@ -94,15 +94,15 @@ def run(root: Path) -> list[str]:
 
     if in_progress_count > 1:
         problems.append(
-            f"{in_progress_count} tasks are in_progress — the harness works "
-            f"one task at a time (see AGENTS.md §2)")
+            f"{in_progress_count} tasks are in_progress -- the harness works "
+            f"one task at a time (see AGENTS.md section 2)")
 
     current = current_path.read_text(encoding="utf-8")
     current_is_empty = EMPTY_MARKER in current
     if in_progress_count > 0 and current_is_empty:
         problems.append(
             "a task is in_progress but progress/current.md is in its empty "
-            "state — work must be reflected in current.md (AGENTS.md §2)")
+            "state -- work must be reflected in current.md (AGENTS.md section 2)")
     has_blocked = any(isinstance(t, dict) and t.get("status") == "blocked"
                       for t in tasks)
     if in_progress_count == 0 and not has_blocked and not current_is_empty:
