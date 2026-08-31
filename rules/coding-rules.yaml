@@ -1,0 +1,90 @@
+# Account and cost-center coding rules.
+#
+# ── SYNTHETIC EXAMPLE ─────────────────────────────────────────────────────────
+# Every supplier, account and cost center below is invented for demonstration.
+# Account numbers follow a Norwegian NS 4102-style layout to match the example
+# jurisdiction profile. Replace the whole rule set with your company's chart of
+# accounts and suppliers when instantiating the template.
+#
+# Changes to this file require reviewer approval (control C-06).
+# ──────────────────────────────────────────────────────────────────────────────
+#
+# How scripts/invoice_classify.py applies this file (deterministic cascade,
+# first match wins):
+#   1. suppliers      — case-insensitive exact match on supplier name
+#   2. keywords       — any keyword found in the invoice description (lowercased)
+#   3. amount_ranges  — invoice amount within [min_amount, max_amount]
+#   4. fallback       — always matches, low confidence
+#
+# Every proposal carries a confidence. Below confidence_threshold the item is
+# flagged needs_review and must go to a human (control C-08). The classifier
+# proposes; it never decides.
+
+version: 1
+currency: NOK
+
+# Proposals below this confidence are flagged needs_review.
+confidence_threshold: 0.75
+
+cost_centers:
+  CC-ADM: Administration
+  CC-IT: IT
+  CC-SAL: Sales
+  CC-MKT: Marketing
+  CC-FAC: Facilities
+
+suppliers:
+  - supplier: "Fjellkraft Energi AS"        # invented
+    account: "6340"
+    account_name: "Light, heat"
+    cost_center: CC-FAC
+    confidence: 0.95
+  - supplier: "Skylab Programvare AS"       # invented
+    account: "6420"
+    account_name: "Rental of data systems (software subscriptions)"
+    cost_center: CC-IT
+    confidence: 0.95
+  - supplier: "Kontorrekvisita Nord AS"     # invented
+    account: "6800"
+    account_name: "Office supplies"
+    cost_center: CC-ADM
+    confidence: 0.90
+
+keywords:
+  - keywords: [software, subscription, saas, license, licence]
+    account: "6420"
+    account_name: "Rental of data systems (software subscriptions)"
+    cost_center: CC-IT
+    confidence: 0.80
+  - keywords: [flight, flights, hotel, travel, taxi]
+    account: "7140"
+    account_name: "Travel expenses"
+    cost_center: CC-SAL
+    confidence: 0.80
+  - keywords: [advertising, marketing, campaign]
+    account: "7320"
+    account_name: "Advertising"
+    cost_center: CC-MKT
+    confidence: 0.80
+  - keywords: [cleaning, janitorial]
+    account: "6360"
+    account_name: "Cleaning"
+    cost_center: CC-FAC
+    confidence: 0.80
+
+amount_ranges:
+  # Above the (synthetic) capitalization threshold: propose fixed asset,
+  # deliberately low confidence — capitalization is a judgment call.
+  - min_amount: 30000
+    account: "1250"
+    account_name: "Equipment (consider capitalization)"
+    cost_center: CC-ADM
+    confidence: 0.60
+    note: "At or above capitalization threshold — verify against asset policy before posting."
+
+fallback:
+  account: "7790"
+  account_name: "Other operating expenses"
+  cost_center: CC-ADM
+  confidence: 0.30
+  note: "No rule matched — human coding required."

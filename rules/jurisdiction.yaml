@@ -1,0 +1,89 @@
+# Jurisdiction profile — country-specific requirements, declared, not hard-coded.
+#
+# The harness core is jurisdiction-agnostic. Any statutory or VAT-related task
+# starts by reading this file (control C-05). Agents never assume filing
+# cadences, formats or retention periods from memory.
+#
+# `active_profile` selects the profile the harness works under. The `NO`
+# profile ships as a WORKED EXAMPLE with plausible Norwegian values; verify
+# every value against official sources (Skatteetaten, Regnskapsregisteret,
+# lovdata.no) before relying on it in production. The `_TEMPLATE` profile is
+# the empty scaffold for adding other countries (typical explorer task; lands
+# only with reviewer approval, control C-06).
+#
+# checks/check_jurisdiction.py validates that the active profile is complete
+# and consistent.
+
+active_profile: "NO"
+
+profiles:
+
+  # ── EXAMPLE PROFILE: Norway ─────────────────────────────────────────────────
+  # Included as a worked example. Values are plausible as of 2026 but are NOT
+  # legal advice and NOT guaranteed current. Verify before production use.
+  "NO":
+    country_name: Norway
+    is_example: true
+    currency: NOK
+
+    chart_of_accounts_standard: "NS 4102"
+
+    statutory_export_format: "SAF-T Financial"
+    statutory_export_notes: >
+      Norwegian SAF-T Financial XML; produced on demand from the tax
+      authority (Skatteetaten). Validate exports with
+      scripts/saft_validate.py before archiving or submission.
+
+    e_invoicing_standard: "EHF (Peppol BIS Billing 3.0)"
+    e_invoicing_notes: >
+      Mandatory for invoicing Norwegian public-sector customers; widely used
+      B2B via the Peppol network.
+
+    vat:
+      filing_cadence: bimonthly
+      cadence_notes: >
+        Standard scheme: six two-month periods per year. Each return and
+        payment is due one month and ten days after the period ends
+        (e.g. Jan–Feb due 10 April). Alternative annual scheme exists for
+        small businesses — declare it here if it applies.
+
+    retention_years: 5
+    retention_notes: >
+      Primary accounting documentation per the Norwegian Bookkeeping Act
+      (bokføringsloven). Some records carry longer or shorter periods —
+      document deviations per record type when instantiating.
+
+    statutory_reporting_deadlines:
+      - name: VAT return (skattemelding for merverdiavgift)
+        frequency: bimonthly
+        deadline_rule: "1 month + 10 days after each two-month period ends"
+      - name: A-melding (payroll reporting)
+        frequency: monthly
+        deadline_rule: "5th of the following month"
+      - name: Annual financial statements (Regnskapsregisteret)
+        frequency: annual
+        deadline_rule: "Within 6 months of fiscal year end; filing due 31 July for calendar-year entities"
+      - name: SAF-T Financial export
+        frequency: on-demand
+        deadline_rule: "Upon request from the tax authority, within the deadline stated in the request"
+
+  # ── EMPTY TEMPLATE: copy this block to add a country ────────────────────────
+  # Keep the key "_TEMPLATE" intact; add your country under its ISO 3166-1
+  # alpha-2 code. Fill every field or mark it UNKNOWN with what is needed to
+  # resolve it. Cite sources in the *_notes fields (explorer role: every claim
+  # gets a source and a consultation date).
+  "_TEMPLATE":
+    country_name: ""
+    is_example: false
+    currency: ""                     # ISO 4217
+    chart_of_accounts_standard: ""   # national standard or "company-specific"
+    statutory_export_format: ""      # e.g. SAF-T variant, FEC, GoBD export
+    statutory_export_notes: ""
+    e_invoicing_standard: ""         # e.g. Peppol BIS, Factur-X, FatturaPA
+    e_invoicing_notes: ""
+    vat:
+      filing_cadence: ""             # monthly | bimonthly | quarterly | annual | none
+      cadence_notes: ""
+    retention_years: 0
+    retention_notes: ""
+    statutory_reporting_deadlines: []  # list of {name, frequency, deadline_rule}
