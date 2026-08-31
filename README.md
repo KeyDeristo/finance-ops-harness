@@ -14,6 +14,13 @@ in one repository that doubles as audit documentation.
 > legal or accounting advice — verify against official sources before relying
 > on them.
 
+## Status
+
+v0.1.0 — template scaffold with synthetic data only. Not yet used in
+production, so treat the SOPs, controls and jurisdiction values as a starting
+point to verify, not as a finished process. Contributions and forks are
+welcome.
+
 ## Who this is for
 
 Finance teams (and the engineers who support them) who want to run
