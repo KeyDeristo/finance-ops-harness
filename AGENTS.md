@@ -38,6 +38,15 @@ passing check are not trustworthy evidence.
 2. Never work on a task that is not reflected in `progress/current.md`. If the
    user asks for ad-hoc work, first record it as a task in `tasks.json`.
 
+### 2.1 Harness work is not a task
+
+One exception to the above. Changes to the harness *itself* — `checks/`,
+`scripts/`, `tests/`, `.github/`, `.claude/`, `AGENTS.md`, `README.md` — follow
+normal git flow (branch, CI green, review before merge) and are **not** recorded
+in `progress/tasks.json`. Work done *with* the harness — reconciliations, coding
+runs, jurisdiction profiles, SOP fill-ins, anything touching `data/` or the
+content of `rules/` — follows the tasks.json → bookkeeper → reviewer flow.
+
 ## 3. Repo map — where to look for what
 
 | You need… | Look in… |
