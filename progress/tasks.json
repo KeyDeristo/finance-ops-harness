@@ -1,0 +1,71 @@
+[
+  {
+    "id": "T-001",
+    "title": "Reconcile bank account 1920 for July 2026",
+    "description": "Match the July bank statement against the ledger per docs/sops/month-end.md step 1. List and explain all unmatched items (control C-07). Synthetic example task shipped with the template, closed with example evidence.",
+    "acceptance_criteria": [
+      "Every statement line is matched to a ledger entry or listed as unmatched with an explanation",
+      "Reconciliation report saved as evidence",
+      "checks/run_all.py passes"
+    ],
+    "status": "done",
+    "evidence": [
+      "script-output: scripts/bank_reconcile.py on data/synthetic/bank_statement.csv + data/synthetic/ledger.csv — 8 matched (6 exact, 2 date-tolerance), 1 unmatched bank item (B-1009 bank fee), 1 unmatched ledger item (JE-7009 settlement in transit)",
+      "file: progress/history.md — reviewer approval line dated 2026-08-28",
+      "check: checks/run_all.py — pass"
+    ],
+    "owner": "bookkeeper"
+  },
+  {
+    "id": "T-002",
+    "title": "Review open AP items older than 30 days",
+    "description": "Review accounts payable for overdue or aged items per docs/sops/month-end.md step 2. Confirm completeness of invoice capture and flag items needing accrual or follow-up.",
+    "acceptance_criteria": [
+      "All AP items older than 30 days listed with age and status",
+      "Each aged item has a documented explanation or follow-up action",
+      "Review note saved under progress/"
+    ],
+    "status": "pending",
+    "evidence": [],
+    "owner": ""
+  },
+  {
+    "id": "T-003",
+    "title": "Code pending supplier invoices",
+    "description": "Run scripts/invoice_classify.py on data/synthetic/invoices.csv, apply rules/coding-rules.yaml, and route every needs_review item to a human decision per docs/sops/p2p.md step 3 (control C-08).",
+    "acceptance_criteria": [
+      "Every invoice has a proposed account, cost center and confidence",
+      "All proposals below the confidence threshold are flagged and listed for human review",
+      "Classification output saved under progress/"
+    ],
+    "status": "pending",
+    "evidence": [],
+    "owner": ""
+  },
+  {
+    "id": "T-004",
+    "title": "Validate SAF-T Financial export sample",
+    "description": "Validate data/synthetic/saft_sample.xml with scripts/saft_validate.py per docs/sops/month-end.md step 6. Check rules/jurisdiction.yaml first (control C-05).",
+    "acceptance_criteria": [
+      "Mandatory SAF-T sections present",
+      "Debits equal credits in every transaction",
+      "Validation report saved under progress/"
+    ],
+    "status": "pending",
+    "evidence": [],
+    "owner": ""
+  },
+  {
+    "id": "T-005",
+    "title": "Execute month-end close checklist for August 2026",
+    "description": "Work through docs/sops/month-end.md for August 2026. Create one task per checklist step that is not already tracked, then execute in order. Steps marked FILL-IN in the SOP are blocked until the template is instantiated with company specifics.",
+    "acceptance_criteria": [
+      "Every close step is tracked as a task with acceptance criteria",
+      "All close tasks are done with evidence, or blocked with a documented reason",
+      "One history.md line per closed task"
+    ],
+    "status": "pending",
+    "evidence": [],
+    "owner": ""
+  }
+]
