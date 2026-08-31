@@ -1,0 +1,9 @@
+invoice_id,supplier,invoice_date,description,amount,currency
+SI-1001,Fjellkraft Energi AS,2026-08-02,Electricity July - Storgata 12,4310.25,NOK
+SI-1002,Skylab Programvare AS,2026-08-03,Annual SaaS subscription renewal,35880.00,NOK
+SI-1003,Kontorrekvisita Nord AS,2026-08-05,Office supplies and paper,980.40,NOK
+SI-1004,Reisebyra Vidde AS,2026-08-07,Flights and hotel - customer visit,8420.00,NOK
+SI-1005,Digital Annonse AS,2026-08-10,Online advertising campaign,15000.00,NOK
+SI-1006,Maskinparken AS,2026-08-12,Workstation for new hire,42500.00,NOK
+SI-1007,Kaffehjornet AS,2026-08-14,Team lunch,1650.00,NOK
+SI-1008,Fjellvann Renhold AS,2026-08-15,Monthly cleaning services August,5600.00,NOK

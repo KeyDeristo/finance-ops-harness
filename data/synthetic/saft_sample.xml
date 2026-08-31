@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SYNTHETIC SAMPLE for testing scripts/saft_validate.py.
+     All companies, numbers and amounts are invented. This is a structurally
+     minimal illustration of a Norwegian SAF-T Financial file, not a complete
+     or schema-valid export. -->
+<AuditFile xmlns="urn:StandardAuditFile-Taxation-Financial:NO">
+  <Header>
+    <AuditFileVersion>1.30</AuditFileVersion>
+    <AuditFileCountry>NO</AuditFileCountry>
+    <AuditFileDateCreated>2026-08-01</AuditFileDateCreated>
+    <SoftwareCompanyName>Synthetic Software AS</SoftwareCompanyName>
+    <SoftwareID>finance-ops-harness-sample</SoftwareID>
+    <SoftwareVersion>0.1</SoftwareVersion>
+    <Company>
+      <RegistrationNumber>999999999</RegistrationNumber>
+      <Name>Eksempelfirma AS</Name>
+    </Company>
+    <DefaultCurrencyCode>NOK</DefaultCurrencyCode>
+    <SelectionCriteria>
+      <PeriodStart>7</PeriodStart>
+      <PeriodStartYear>2026</PeriodStartYear>
+      <PeriodEnd>7</PeriodEnd>
+      <PeriodEndYear>2026</PeriodEndYear>
+    </SelectionCriteria>
+    <TaxAccountingBasis>A</TaxAccountingBasis>
+  </Header>
+  <MasterFiles>
+    <GeneralLedgerAccounts>
+      <Account>
+        <AccountID>1500</AccountID>
+        <AccountDescription>Trade receivables</AccountDescription>
+      </Account>
+      <Account>
+        <AccountID>1920</AccountID>
+        <AccountDescription>Bank deposits</AccountDescription>
+      </Account>
+      <Account>
+        <AccountID>6340</AccountID>
+        <AccountDescription>Light, heat</AccountDescription>
+      </Account>
+    </GeneralLedgerAccounts>
+  </MasterFiles>
+  <GeneralLedgerEntries>
+    <NumberOfEntries>2</NumberOfEntries>
+    <TotalDebit>60450.50</TotalDebit>
+    <TotalCredit>60450.50</TotalCredit>
+    <Journal>
+      <JournalID>GL</JournalID>
+      <Description>General ledger</Description>
+      <Type>GL</Type>
+      <Transaction>
+        <TransactionID>JE-7003</TransactionID>
+        <Period>7</Period>
+        <PeriodYear>2026</PeriodYear>
+        <TransactionDate>2026-07-05</TransactionDate>
+        <Description>Settlement INV-2041</Description>
+        <Line>
+          <RecordID>1</RecordID>
+          <AccountID>1920</AccountID>
+          <DebitAmount>
+            <Amount>56250.00</Amount>
+          </DebitAmount>
+        </Line>
+        <Line>
+          <RecordID>2</RecordID>
+          <AccountID>1500</AccountID>
+          <CreditAmount>
+            <Amount>56250.00</Amount>
+          </CreditAmount>
+        </Line>
+      </Transaction>
+      <Transaction>
+        <TransactionID>JE-7002</TransactionID>
+        <Period>7</Period>
+        <PeriodYear>2026</PeriodYear>
+        <TransactionDate>2026-07-03</TransactionDate>
+        <Description>Electricity Fjellkraft</Description>
+        <Line>
+          <RecordID>1</RecordID>
+          <AccountID>6340</AccountID>
+          <DebitAmount>
+            <Amount>4200.50</Amount>
+          </DebitAmount>
+        </Line>
+        <Line>
+          <RecordID>2</RecordID>
+          <AccountID>1920</AccountID>
+          <CreditAmount>
+            <Amount>4200.50</Amount>
+          </CreditAmount>
+        </Line>
+      </Transaction>
+    </Journal>
+  </GeneralLedgerEntries>
+</AuditFile>
