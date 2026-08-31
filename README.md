@@ -1,5 +1,7 @@
 # finance-ops-harness
 
+[![CI](https://github.com/KeyDeristo/finance-ops-harness/actions/workflows/ci.yml/badge.svg)](https://github.com/KeyDeristo/finance-ops-harness/actions/workflows/ci.yml)
+
 A generic, open-source template that applies **harness engineering** — the
 discipline of giving AI agents a verified environment, explicit rules and
 file-based memory — to **finance operations**. SOPs, controls, coding rules, a

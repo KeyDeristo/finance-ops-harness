@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  harness:
+    name: ${{ matrix.os }} / Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # requirements.txt pins pandas, pyyaml and pytest.
+      # PYTHONIOENCODING is deliberately NOT set: the Windows legs must run
+      # under the default locale codepage so encoding regressions surface here.
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Tests
+        run: python -m pytest -q
+
+      - name: Harness entry point
+        run: python checks/init.py
+
+      - name: Script - bank reconciliation
+        run: python scripts/bank_reconcile.py data/synthetic/bank_statement.csv data/synthetic/ledger.csv
+
+      - name: Script - invoice classification
+        run: python scripts/invoice_classify.py data/synthetic/invoices.csv
+
+      - name: Script - SAF-T validation
+        run: python scripts/saft_validate.py data/synthetic/saft_sample.xml
