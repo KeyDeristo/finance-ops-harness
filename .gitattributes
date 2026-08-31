@@ -2,3 +2,7 @@
 * text=auto
 # Shell scripts must stay LF: a CRLF shebang line breaks execution on Linux/macOS.
 *.sh text eol=lf
+# Keep YAML LF in the working copy too, so CI and rules files read the
+# same on every platform.
+*.yml text eol=lf
+*.yaml text eol=lf
