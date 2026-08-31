@@ -45,7 +45,7 @@ def run(root: Path) -> list[str]:
     if not active or not isinstance(active, str):
         return ["jurisdiction.yaml: 'active_profile' must be a non-empty string"]
     if active == "_TEMPLATE":
-        return ["jurisdiction.yaml: active_profile is '_TEMPLATE' — select a "
+        return ["jurisdiction.yaml: active_profile is '_TEMPLATE' -- select a "
                 "real profile (the template block is a scaffold, not a profile)"]
     if active not in profiles:
         return [f"jurisdiction.yaml: active_profile {active!r} not found in "

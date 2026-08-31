@@ -30,7 +30,7 @@ DEFAULT_TOLERANCE_DAYS = 3
 
 
 def _load(path: str, ref_column: str) -> pd.DataFrame:
-    df = pd.read_csv(path)
+    df = pd.read_csv(path, encoding="utf-8")
     required = {"date", "amount", ref_column}
     missing = required - set(df.columns)
     if missing:

@@ -14,7 +14,7 @@ def rules(repo_root):
 
 @pytest.fixture(scope="module")
 def proposals(synthetic_dir, rules):
-    invoices = pd.read_csv(synthetic_dir / "invoices.csv")
+    invoices = pd.read_csv(synthetic_dir / "invoices.csv", encoding="utf-8")
     df = invoice_classify.classify_all(invoices, rules)
     return df.set_index("invoice_id")
 
@@ -79,6 +79,6 @@ def test_cli_writes_output_csv(synthetic_dir, tmp_path):
     exit_code = invoice_classify.main([
         str(synthetic_dir / "invoices.csv"), "--output", str(out)])
     assert exit_code == 0
-    saved = pd.read_csv(out)
+    saved = pd.read_csv(out, encoding="utf-8")
     assert len(saved) == 8
     assert saved["needs_review"].sum() == 2
