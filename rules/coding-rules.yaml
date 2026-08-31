@@ -80,11 +80,11 @@ amount_ranges:
     account_name: "Equipment (consider capitalization)"
     cost_center: CC-ADM
     confidence: 0.60
-    note: "At or above capitalization threshold — verify against asset policy before posting."
+    note: "At or above capitalization threshold -- verify against asset policy before posting."
 
 fallback:
   account: "7790"
   account_name: "Other operating expenses"
   cost_center: CC-ADM
   confidence: 0.30
-  note: "No rule matched — human coding required."
+  note: "No rule matched -- human coding required."
